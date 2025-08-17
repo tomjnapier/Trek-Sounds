@@ -1,6 +1,7 @@
 import Controls from "./Controls";
 import { setupTray } from "./tray";
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { exit, relaunch } from '@tauri-apps/plugin-process';
 
 const unlisten = async () => {
   const currentWindow = await getCurrentWindow();

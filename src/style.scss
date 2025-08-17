@@ -134,21 +134,23 @@ section {
 .lcars-bg--mauve--light,
 .lcars-button--mauve-light {
   background-color: var(--lcars-mauve--light);
-}
 
-.lcars-button--mauve:hover,
-.lcars-button--mauve:focus {
-  background-color: var(--lcars-mauve--dark);
+  &:hover,
+  &:focus {
+    background-color: var(--lcars-mauve--dark);
+  }
+
 }
 
 .lcars-bg--red,
 .lcars-button--red {
   background-color: var(--lcars-red);
-}
 
-.lcars-button--red:hover,
-.lcars-button--red:focus {
-  background-color: var(--lcars-red--dark);
+  &:hover,
+  &:focus {
+    background-color: var(--lcars-red--dark);
+  }
+
 }
 
 .lcars-bg--red--light,
