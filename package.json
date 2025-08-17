@@ -1,0 +1,21 @@
+{
+  "name": "trek-sounds",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri",
+    "build": "esbuild src/main.js --bundle --outfile=src/app.js"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.7.1",
+    "@tauri-apps/plugin-process": "^2.3.0",
+    "esbuild": "0.25.9",
+    "tauri-plugin-positioner-api": "^0.2.7"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.7.0",
+    "@tauri-apps/plugin-positioner": "^2.3.0",
+    "@tauri-apps/plugin-shell": "^2.3.0"
+  }
+}
