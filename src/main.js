@@ -1,6 +1,6 @@
 import Controls from "./Controls";
 import { setupTray } from "./tray";
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { getCurrentWindow, Window } from '@tauri-apps/api/window';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
 
 const unlisten = async () => {
@@ -14,7 +14,6 @@ const unlisten = async () => {
 
 // you need to call unlisten if your handler goes out of scope e.g. the component is unmounted
 unlisten();
-
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -32,4 +31,9 @@ window.addEventListener("DOMContentLoaded", () => {
     await exit(0);
   });
 
-});
+  const settingsButton = document.querySelector('[data-action="settings"]');
+  settingsButton.addEventListener('click', async () => {
+    console.log('click settings')
+  });
+
+})

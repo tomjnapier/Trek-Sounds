@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   root: "src",
   build: {
-    outDir: 'dist',  // Output directory
+    outDir: './static',  // Output directory
     rollupOptions: {
       input: {
         main: 'src/main.js',        // JavaScript entry file

@@ -1,7 +1,8 @@
-@font-face {
-  font-family: "LCARS";
-  src: local("Helvetica Ultra Compressed");
-}
+@use "_text";
+@use "_sections";
+@use "_backgrounds";
+
+@use "_buttons";
 
 :root {
   --lcars-red         : hsl(0, 50%, 60%);
@@ -38,7 +39,7 @@
   
   --lcars-black       : hsl(0, 0%, 10%);
 
-  font-family: "Helvetica Ultra Compressed", Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "LCARS", Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -94,287 +95,57 @@ section {
   margin-bottom: 1.25rem;
 }
 
-.lcars-text,
-.lcars-button {
-  font-family: "LCARS";
-  text-transform: uppercase;
-}
-
-.lcars-text--xl {
-  font-size: 1.875rem;
-}
-
-.lcars-text--l {
-  font-size: 1.5rem;
-}
-
-.lcars-text--m {
-  font-size: 1.25rem;
-}
-
-.lcars-text--s {
-  font-size: 1rem;
-}
-
-/* text colors */
-.lcars-text--mauve {
-  color: var(--lcars-mauve);
-}
-
-.lcars-text--yellow {
-  color: var(--lcars-yellow);
-}
-
 /* backgrounds */
 .lcars-bg--mauve,
 .lcars-button--mauve {
   background-color: var(--lcars-mauve);
 }
 
-.lcars-bg--mauve--light,
-.lcars-button--mauve-light {
+.lcars-bg--mauve--light {
   background-color: var(--lcars-mauve--light);
-
-  &:hover,
-  &:focus {
-    background-color: var(--lcars-mauve--dark);
-  }
-
 }
 
-.lcars-bg--red,
-.lcars-button--red {
+.lcars-bg--red {
   background-color: var(--lcars-red);
-
-  &:hover,
-  &:focus {
-    background-color: var(--lcars-red--dark);
-  }
-
 }
 
-.lcars-bg--red--light,
-.lcars-button--red-light {
+.lcars-bg--red--light {
   background-color: var(--lcars-red--light);
 }
 
-.lcars-button--red-light:hover,
-.lcars-button--red-light:focus {
-  background-color: var(--lcars-red);
-}
-
-.lcars-bg--yellow,
-.lcars-button--yellow {
+.lcars-bg--yellow {
   background-color: var(--lcars-yellow);
 }
 
-.lcars-bg--sand,
-.lcars-button--sand {
+.lcars-bg--sand {
   background-color: var(--lcars-sand);
 }
 
-.lcars-bg--gold,
-.lcars-button--gold,
-.lcars-button--gold .lcars-button__indicator:before {
+.lcars-bg--gold {
   background-color: var(--lcars-gold);
 }
 
-.lcars-button--gold:hover,
-.lcars-button--gold:focus,
-.lcars-button--gold:hover .lcars-button__indicator:before {
-  background-color: var(--lcars-gold--dark);
-}
-
-.lcars-button--orange:hover,
-.lcars-button--orange:focus,
-.lcars-button--orange:hover .lcars-button__indicator:before {
-  background-color: var(--lcars-orange--dark);
-}
-
-.lcars-bg--orange,
-.lcars-button--orange,
-.lcars-button--orange .lcars-button__indicator:before {
+.lcars-bg--orange {
   background-color: var(--lcars-orange);
 }
 
-.lcars-bg--lilac,
-.lcars-button--lilac {
+.lcars-bg--lilac {
   background-color: var(--lcars-lilac);
 }
 
-.lcars-button--lilac:hover,
-.lcars-button--lilac:focus {
-  background-color: var(--lcars-lilac--dark);
-}
-
-.lcars-bg--red,
-.lcars-button--red,
-.lcars-button--red .lcars-button__indicator:before {
+.lcars-bg--red {
   background-color: var(--lcars-red);
 }
 
-.lcars-button--red:hover,
-.lcars-button--red:focus,
-.lcars-button--red:hover .lcars-button__indicator:before {
-  background-color: var(--lcars-red--dark);
-}
-
-.lcars-bg--blue,
-.lcars-button--blue,
-.lcars-button--blue .lcars-button__indicator:before {
+.lcars-bg--blue {
   background-color: var(--lcars-blue);
 }
 
-.lcars-button--blue:hover,
-.lcars-button--blue:focus {
-  background-color: var(--lcars-blue--dark);
-}
-
-.lcars-bg--blue-light,
-.lcars-button--blue-light {
+.lcars-bg--blue-light {
   background-color: var(--lcars-blue--light);
 }
 
-.lcars-bg--blue-navy,
-.lcars-button--blue-navy,
-.lcars-button--blue-navy .lcars-button__indicator:before {
+.lcars-bg--blue-navy {
   background-color: var(--lcars-blue--navy);
   color: var(--lcars-yellow);
-}
-
-.lcars-button--blue-navy:hover,
-.lcars-button--blue-navy:focus,
-.lcars-button--blue-navy:hover .lcars-button__indicator:before {
-  background-color: var(--lcars-blue--navy--dark);
-}
-
-.lcars-button-group {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.lcars-button-group {
-  display: grid;
-  grid-gap: 0.5rem;
-}
-
-.lcars-button-group--grid {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 0.5rem;
-}
-
-.lcars-button {
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  letter-spacing: 0.01rem;
-  border: 0;
-  text-align: left;
-  position: relative;
-  border-radius: 1px;
-  transition: background 0.1s ease-in-out;
-}
-
-.lcars-button--active {
-  background-color: var(--lcars-yellow);
-  color: var(--lcars-black);
-}
-
-.lcars-button--active .lcars-button__indicator:before {
-  background-color: var(--lcars-yellow);
-}
-
-.lcars-button--active:hover,
-.lcars-button--active:focus,
-.lcars-button--active:hover .lcars-button__indicator:before,
-.lcars-button--active:focus .lcars-button__indicator:before  {
-  background-color: var(--lcars-yellow--dark);
-}
-
-.lcars-button--square {
-  padding-top: 4rem;
-  border-bottom-left-radius: .625rem;
-}
-
-.lcars-button__indicator {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 3rem;
-  background-color: var(--lcars-black);
-}
-
-.lcars-button__indicator:before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin-left: 0.5rem;
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-  background-color: var(--lcars-yellow);
-  transition: background 0.1s ease-in-out;
-}
-
-.lcars-button--pill {
-  border-radius: 100vmax;
-  padding-top: 1rem;
-  padding-right: 1.5rem;
-  padding-bottom: 0.25rem;
-  text-align: right;
-}
-
-/* Sections */
-section.status {
-  display: flex;
-  align-items: center;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.status__icon {
-  height: 3.5rem;
-}
-
-.status__icon svg {
-  width: auto;
-  height: 100%;
-}
-
-section.exit {
-  width: 5rem;
-  margin-bottom: 0;
-}
-
-.divider {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 3.5rem;
-  background-color: var(--lcars-red--light);
-  border: 0;
-  border-top-left-radius: 4rem 2rem;
-}
-
-.divider::before {
-  content: '';
-  display: block;
-  width: calc(100% - 5rem);
-  height: 3rem;
-  background: var(--lcars-black);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border-top-left-radius: 3rem 2rem;
-}
-
-section.visualiser {
-  display: none;
-}
-
-button {
-  cursor: pointer;
 }

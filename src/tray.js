@@ -10,7 +10,7 @@ export async function setupTray() {
   const iconPath = await resolveResource('icons/tray-icon.png');
   const icon = await Image.fromPath(iconPath);
 
-  await TrayIcon.new({
+  const tray = await TrayIcon.new({
     icon,
     "iconAsTemplate": true,
     action: async (event) => {
@@ -18,17 +18,17 @@ export async function setupTray() {
       // add the handle in the action to update the state
       await handleIconState(event);
 
-      const currentWindow = await getCurrentWindow()
-      const isVisible = await currentWindow.isVisible()
+      const currentWindow = await getCurrentWindow();
+      const isVisible = await currentWindow.isVisible();
 
-      if( event.type == "Click" && event.buttonState == "Down" ) {
-        await moveWindow( Position.TrayCenter )
+      if(event.type == "Click" && event.buttonState == "Down" ) {
+        await moveWindow(Position.TrayCenter);
 
         if( isVisible ) {
-          await currentWindow.hide()
+          await currentWindow.hide();
         } else {
-          await currentWindow.show()
-          await currentWindow.setFocus()
+          await currentWindow.show();
+          await currentWindow.setFocus();
         }
       }
     }

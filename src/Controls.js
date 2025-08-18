@@ -1,62 +1,107 @@
 export default class Controls {
+  
   constructor(parameters) {
-    this.playing = false
+
     this.timer = null
     this.player = document.getElementById("lcars-audio-output")
     this.buttons = {
       play: document.querySelector('[data-action="play"]'),
       settings: document.querySelector('[data-action="settings"]'),
-      setCurrent: document.querySelectorAll('[data-action="set-current"]')
+      setCurrent: document.querySelectorAll('[data-action="set-current"]'),
+      activeClass: "lcars-button--active"
     }
+
   }
 
   init() {
-    
-    let current = null
-    let playing = this.playing
-
-    const player = this.player
+  
     const playButton = this.buttons.play
     const settingsButton = this.buttons.settings
     const setCurrent = this.buttons.setCurrent
 
+    this.updatePlayerStatus("paused")
+
     playButton.addEventListener("click", () => {
-      
-      if( !playing ) {
-        player.play()
-        playing = true
-        playButton.classList.add("lcars-button--active")
-        playButton.textContent = "01A-Pause"
-      } else {
-        player.pause()
-        playButton.classList.remove("lcars-button--active")
-        playButton.textContent = "01-Play"
-        playing = false
-      }
-
-    })
-
-    settingsButton.addEventListener("click", () => {
-      console.log("settings")
+      this.playerStart()
     })
 
     setCurrent.forEach(button => {
 
-      button.addEventListener("click", (event) => {
-
-        current = button.dataset.src
-        player.setAttribute("src", current)
-
-        setCurrent.forEach(button => {
-          button.classList.remove("lcars-button--active")
-        })
-
-        button.classList.toggle("lcars-button--active");
-
+      button.addEventListener("click", () => {  
+        this.updateSrc(button)
       })
 
     });
 
+  }
+
+  playerStart() {
+  
+    const playButton = this.buttons.play
+    const activeClass = this.buttons.activeClass
+    const player = this.player
+    const status = player.getAttribute("data-status")
+    let playerCurrentSrc = player.getAttribute("src")
+
+    if( "" || null == playerCurrentSrc )
+      return
+
+    if( status == "paused" && "" !== playerCurrentSrc ) {
+      player.play()
+      this.updatePlayerStatus("playing")
+      
+      playButton.classList.add(activeClass)
+      playButton.textContent = "01A-Pause"
+
+    } else {
+      player.pause()
+      this.updatePlayerStatus("paused")
+      
+      playButton.classList.remove(activeClass)
+      
+      if( "" || null == playerCurrentSrc ) {
+        playButton.textContent = "01-Play"
+      } else {
+        playButton.textContent = "01-Awaiting Src"
+      }
+
+    }
+
+  }
+
+  updateSrc( button ) {
+    
+    const player = this.player
+    const activeClass = this.buttons.activeClass
+    const setCurrent = this.buttons.setCurrent
+    const playButton = this.buttons.play
+
+    const current = button.dataset.src
+
+    if(current !== null || "")
+      player.setAttribute("src", current)
+      playButton.classList.remove(activeClass)
+      
+      this.updatePlayerStatus("paused")
+      
+      playButton.textContent = "01-Play"
+
+    if( button.classList.contains(activeClass) ) {
+      button.classList.remove(activeClass)
+      player.setAttribute("src", "")
+    } else {
+      setCurrent.forEach(button => {
+        button.classList.remove(activeClass)
+      })
+      button.classList.toggle(activeClass);
+    }
+
+  }
+
+  updatePlayerStatus( status ) {
+    const player = this.player
+    if ( typeof status !== undefined )
+      player.setAttribute("data-status", status)
   }
 
 }

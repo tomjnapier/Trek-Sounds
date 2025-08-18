@@ -1,10 +1,4 @@
-use cocoa::appkit::{NSApp, NSApplication, NSApplicationActivationPolicy::*};
-
-unsafe {
-    let app = NSApp();
-    app.setActivationPolicy_(NSApplicationActivationPolicyAccessory);
-}
-
 fn main() {
-  tauri::Builder::default()
+  tauri::Builder::default().setup(|app| 
+  app.set_activation_policy(ActivationPolicy::Accessory);
 }
