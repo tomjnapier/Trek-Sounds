@@ -5,10 +5,21 @@
     "windows",
     "linux"
   ],
+  "local": true,
   "windows": [
     "main"
   ],
   "permissions": [
+    "positioner:default",
+    "core:default",
+    "shell:allow-open",
+    "shell:default",
+    "process:default",
+    "core:window:allow-center",
+    "core:window:allow-hide",
+    "core:window:allow-show",
+    "core:window:allow-set-focus",
+    "core:app:allow-app-hide",
     "positioner:default"
   ]
 }

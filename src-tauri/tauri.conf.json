@@ -24,37 +24,19 @@
     "windows": [
       {
         "devtools": true,
-        "hiddenTitle": true,
         "focus": false,
         "skipTaskbar": true,
         "alwaysOnTop": true,
         "label": "main",
         "title": "Main Window",
-        "width": 420,
+        "width": 350,
         "height": 600,
         "resizable": false,
         "decorations": false,
         "x": 1000,
         "y": 10,
         "transparent": true,
-        "visible": false
-      },
-      {
-        "devtools": true,
-        "hiddenTitle": true,
-        "focus": false,
-        "skipTaskbar": true,
-        "alwaysOnTop": true,
-        "label": "settings",
-        "title": "Settings",
-        "width": 420,
-        "height": 600,
-        "resizable": false,
-        "decorations": false,
-        "x": 1000,
-        "y": 10,
-        "transparent": true,
-        "visible": false
+        "visible":false
       }
     ],
     "security": {
