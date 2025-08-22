@@ -91,3 +91,22 @@
     <div class="status__text lcars-text lcars-text--l lcars-text--yellow">System Available</div>
     </section>
 </template>
+
+<style lang="scss">
+.status__icon {
+  height: 3.5rem;
+}
+
+.status__icon svg {
+  width: auto;
+  height: 100%;
+}
+
+section.status {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+</style>
