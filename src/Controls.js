@@ -15,22 +15,22 @@ export default class Controls {
 
   init() {
   
-    const playButton = this.buttons.play
-    const settingsButton = this.buttons.settings
-    const setCurrent = this.buttons.setCurrent
+    if( !this.player ) return;
+  
+    const { play: playButton, setCurrent } = this.buttons
 
     this.updatePlayerStatus("paused")
 
-    playButton.addEventListener("click", () => {
-      this.playerStart()
-    })
+    if ( playButton ) {
+      playButton.addEventListener("click", () => {
+        this.playerStart()
+      })
+    }
 
     setCurrent.forEach(button => {
-
       button.addEventListener("click", () => {  
         this.updateSrc(button)
       })
-
     });
 
   }
@@ -40,29 +40,27 @@ export default class Controls {
     const playButton = this.buttons.play
     const activeClass = this.buttons.activeClass
     const player = this.player
-    const status = player.getAttribute("data-status")
-    let playerCurrentSrc = player.getAttribute("src")
+    const status = player.getAttribute("data-status") || "paused";
+    const playerCurrentSrc = player.getAttribute("src") || "";
 
-    if( "" || null == playerCurrentSrc )
-      return
+    if( !playerCurrentSrc ) return;
 
-    if( status == "paused" && "" !== playerCurrentSrc ) {
+    if( status === "paused" ) {
       player.play()
       this.updatePlayerStatus("playing")
       
-      playButton.classList.add(activeClass)
-      playButton.textContent = "01A-Pause"
+      if( playButton ) {
+        playButton.classList.add(activeClass)
+        playButton.textContent = "01A-Pause"
+      }
 
     } else {
       player.pause()
       this.updatePlayerStatus("paused")
       
-      playButton.classList.remove(activeClass)
-      
-      if( "" || null == playerCurrentSrc ) {
-        playButton.textContent = "01-Play"
-      } else {
-        playButton.textContent = "01-Awaiting Src"
+      if ( playButton ) {
+        playButton.classList.remove(activeClass)
+        playButton.textContent = playerCurrentSrc ? "01-Play" : "01-Awaiting Src";
       }
 
     }
@@ -72,11 +70,12 @@ export default class Controls {
   updateSrc( button ) {
     
     const player = this.player
+    
     const activeClass = this.buttons.activeClass
     const setCurrent = this.buttons.setCurrent
     const playButton = this.buttons.play
 
-    const current = button.dataset.src
+    const current = button.dataset.src || "";
 
     if(current !== null || "")
       player.setAttribute("src", current)
@@ -90,9 +89,7 @@ export default class Controls {
       button.classList.remove(activeClass)
       player.setAttribute("src", "")
     } else {
-      setCurrent.forEach(button => {
-        button.classList.remove(activeClass)
-      })
+      setCurrent.forEach( button => button.classList.remove(activeClass) )
       button.classList.toggle(activeClass);
     }
 
@@ -100,7 +97,7 @@ export default class Controls {
 
   updatePlayerStatus( status ) {
     const player = this.player
-    if ( typeof status !== undefined )
+    if ( player && status !== undefined )
       player.setAttribute("data-status", status)
   }
 
