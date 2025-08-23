@@ -17,7 +17,7 @@
   "productName": "Trek Sounds",
   "mainBinaryName": "Trek Sounds",
   "version": "0.0.0",
-  "identifier": "co.uk.tomjnapier.app",
+  "identifier": "co.uk.tomjnapier",
   "plugins": {},
   "app": {
     "macOSPrivateApi": true,

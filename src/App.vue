@@ -6,6 +6,7 @@
     import Controls from "./Controls.vue"
     import Exit from './Exit.vue'
     import Visualiser from './Visualiser.vue'
+    import Settings from './Settings.vue'
 
     import { reactive, ref } from 'vue'
     
@@ -14,6 +15,10 @@
     const playerState = reactive({
         status: "paused",
         src: null
+    })
+
+    const appState = reactive({
+        settings: false
     })
 
     function play() {
@@ -37,11 +42,15 @@
         playerState.status = "paused"
     }
 
+    function toggleSettings(){
+        appState.settings = !appState.settings
+    }
+
 </script>
 
 <template>
-    <Header></Header>
-    <main>
+    <Header v-if="!appState.settings" />
+    <main v-if="!appState.settings">
         <Status></Status>
         <Sounds 
             :playerState="playerState"   
@@ -55,13 +64,22 @@
             :play="play" 
             :pause="pause"
             :stop="stop"
+            :settings="toggleSettings"
         />
     </main>
-    <hr class="divider"></hr>
-    <footer>
+    <hr v-if="!appState.settings" class="divider"></hr>
+    <footer v-if="!appState.settings">
         <Exit></Exit>
-        <Visualiser :status="playerState.status"/>
+        <Visualiser 
+            :status="playerState.status"
+        />
     </footer>
+
+    <Settings 
+        :settings="toggleSettings" 
+        v-if="appState.settings"
+    />
+
 </template>
 
 <style scoped>

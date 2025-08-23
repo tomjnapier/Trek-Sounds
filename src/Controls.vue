@@ -6,7 +6,9 @@
         play: Function,
         pause: Function,
         stop: Function,
-        playerState: Object
+        settings: Function,
+        playerState: Object,
+
     })
 
     function togglePlay() {
@@ -26,8 +28,9 @@
         return '01-Awaiting Src'
     })
 
-    function settings() {
-
+    function handleSettings() {
+        if ( typeof props.settings !== 'function' || !props.settings ) return;
+        props.settings()
     }
 
     function timer() {
@@ -45,7 +48,7 @@
             classes: "lcars-button lcars-button--pill lcars-button--orange lcars-text--m"
         },
         {
-            action: settings,
+            action: handleSettings,
             text: "02-Settings",
             classes: "lcars-button lcars-button--pill lcars-button--mauve lcars-text--m"
         },
